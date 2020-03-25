@@ -13,12 +13,31 @@ import javax.persistence.Id;
 public class BlogPost {
     private @Id @GeneratedValue Long id;
     private String title;
+    private String date;
+    private String description;
+    private int likes;
+    private int dislikes;
+    private boolean liked;
+    private boolean disliked;
     private String content;
 
     BlogPost() {}
 
-    BlogPost(String title, String content) {
+    BlogPost(String title,
+             String date,
+             String description,
+             int likes,
+             int dislikes,
+             boolean liked,
+             boolean disliked,
+             String content) {
         this.title = title;
+        this.date = date;
+        this.description = description;
+        this.likes = likes;
+        this.dislikes = dislikes;
+        this.liked = liked;
+        this.disliked = disliked;
         this.content = content;
     }
 }
