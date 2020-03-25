@@ -15,6 +15,9 @@ import ThumbDown from '@material-ui/icons/ThumbDown';
 import AddCircle from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import {Header, Detail, Footer} from './components';
+import HTTPFetch from "../../HTTPFetch";
+import HTTPPost from "../../HTTPPost";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -58,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function RecipeReviewCard() {
+export default function BlogCard() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -78,9 +81,15 @@ export default function RecipeReviewCard() {
 
     };
 
+    const httpPost = new HTTPPost();
+    const httpFetch = new HTTPFetch();
+
     return (
         <div>
         <div className={classes.root}>
+            <IconButton className={classes.addIcon}>
+                <AddCircle onClick={httpPost.postDataToBackend()}/>
+            </IconButton>
             <Card>
                 <IconButton className={classes.cardIcons}>
                     <EditIcon/>
