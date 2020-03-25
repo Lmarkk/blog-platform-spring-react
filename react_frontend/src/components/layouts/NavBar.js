@@ -13,6 +13,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
     },
+    color: {
+        background: theme.palette.grey[800]
+    },
     menuButton: {
         marginRight: theme.spacing(2),
     },
@@ -70,17 +73,17 @@ export default function SearchAppBar() {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position='fixed' className={classes.color}>
                 <Toolbar>
-                    <Typography className={classes.title} variant="h6" noWrap>
-                        <Link style={{display: "table-cell", color:"inherit", textDecoration:'none'}} href="https://www.youtube.com" target="_blank">SuperBlogger3000</Link>
+                    <Typography className={classes.title} variant='h6' noWrap>
+                        <Link style={{display: 'table-cell', color:'inherit', textDecoration:'none'}} href='https://www.youtube.com' target='_blank'>SuperBlogger3000</Link>
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
                         <InputBase
-                            placeholder="Search…"
+                            placeholder='Search…'
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
