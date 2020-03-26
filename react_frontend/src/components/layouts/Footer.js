@@ -8,7 +8,7 @@ function Copyright() {
     return (
         <Typography variant="body2" style={{color: "white"}}>
             {'Copyright © '}
-            Lassi Markkinen & Samu Willman
+            Samu Willman & Lassi Markkinen
             {' '}
             {new Date().getFullYear()}
             {'.'}

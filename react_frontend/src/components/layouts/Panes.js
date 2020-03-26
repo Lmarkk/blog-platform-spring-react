@@ -2,7 +2,6 @@ import React from 'react'
 import { Grid } from '@material-ui/core'
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
-import MiddlePane from "./MiddlePane";
 
 const styles = {
     Paper: {
@@ -27,10 +26,5 @@ export default function Panes() {
         )
 
 }
-/*
-<Grid Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-    <MiddlePane style={styles.PaperLeft}></MiddlePane>
-</Grid>
 
- */
 

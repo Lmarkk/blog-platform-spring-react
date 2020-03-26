@@ -6,11 +6,13 @@ const styles = {
     first: {
         marginRight: 50,
         marginTop: 140,
+        marginLeft: 50,
         padding: 0
     },
     afterFirst: {
         marginRight: 50,
         marginTop: 50,
+        marginLeft: 50,
         padding: 0
     }
 };

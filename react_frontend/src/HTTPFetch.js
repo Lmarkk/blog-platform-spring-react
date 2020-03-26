@@ -1,30 +1,18 @@
 import React from "react";
-class HTTPFetch extends React.component {
+class HTTPFetch extends React.Component {
+
+
 
     constructor(props) {
         super(props);
     }
 
-
-
-    getDataFromBackend() {
-        const apiUrl = `localhost:3000/blogposts`;
+    fetchDataFromBackend() {
+        const apiUrl = `http://localhost:8080/blogposts`;
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(err => console.log(err));
-    }
-
-    componentDidMount() {
-        this.getDataFromBackend();
-    }
-
-    render() {
-        return (
-            <div>
-
-            </div>
-        );
     }
 }
 

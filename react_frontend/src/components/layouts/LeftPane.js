@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -15,9 +14,10 @@ import ThumbDown from '@material-ui/icons/ThumbDown';
 import AddCircle from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import {Header, Detail, Footer} from './components';
 import HTTPFetch from "../../HTTPFetch";
 import HTTPPost from "../../HTTPPost";
+import TextField from '@material-ui/core/TextField';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -58,6 +58,12 @@ const useStyles = makeStyles(theme => ({
         display: 'block',
         marginRight: 0,
         clear: 'left'
+    },
+    headerTextField: {
+        display: 'block',
+        alignContent: 'center',
+        marginTop: 10,
+        marginLeft: 10
     }
 }));
 
@@ -69,46 +75,29 @@ export default function BlogCard() {
         setExpanded(!expanded);
     };
 
-    const handleDeleteClick = () => {
-
+    const handleDateChange = date => {
+        setSelectedDate(date);
     };
 
-    const handleEditClick = () => {
-
-    };
-
-    const handleAddClick = () => {
-
-    };
-
+    const [selectedDate, setSelectedDate] = React.useState(new Date(''));
     const httpPost = new HTTPPost();
     const httpFetch = new HTTPFetch();
 
     return (
         <div>
         <div className={classes.root}>
-            <IconButton className={classes.addIcon}>
-                <AddCircle onClick={httpPost.postDataToBackend()}/>
+            <IconButton className={classes.addIcon} onClick={httpFetch.fetchDataFromBackend}>
+                <AddCircle/>
             </IconButton>
             <Card>
-                <IconButton className={classes.cardIcons}>
-                    <EditIcon/>
-                </IconButton>
-                <IconButton className={classes.cardIcons}>
-                    <DeleteIcon/>
-                </IconButton>
-                <CardHeader className={classes.cardHeader}
-                            title='My first blog post!'
-                            subheader='October 29, 2018'
-                />
+                <TextField required id={"standard-required"} defaultValue="Title" className={classes.headerTextField} inputProps={{min: 0, style: { textAlign: 'center' }}} />
+                <CardHeader className={classes.cardHeader} subheader='October 29, 2018'/>
                 <img
                     className={classes.media}
                     src={require('../images/nature.jpg')} alt={'cannot display'}
                 />
                 <CardContent>
-                    <Typography variant='body1' color='textSecondary'>
-                        I took this picture yesterday and I'm so happy how it turned out!
-                    </Typography>
+                    <TextField required id={"standard-required"}   />
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton aria-label='add to favorites'>
