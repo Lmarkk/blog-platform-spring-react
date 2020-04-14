@@ -22,12 +22,8 @@ public class MyController {
         blogPostRepository.save(new BlogPost(blogPostRequestModel.getTitle(),
                 blogPostRequestModel.getDate(),
                 blogPostRequestModel.getDescription(),
-                blogPostRequestModel.getLikes(),
-                blogPostRequestModel.getDislikes(),
-                blogPostRequestModel.getLiked(),
-                blogPostRequestModel.getDisliked(),
+                0,
+                0,
                 blogPostRequestModel.getContent()));
     }
-    
-
 }
