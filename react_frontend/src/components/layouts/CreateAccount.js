@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import {lightBlue} from "@material-ui/core/colors";
+import HTTPFetch from "../../HTTPFetch";
 
 const useStyles = makeStyles(theme => ({
     textArea: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const httpPost = new HTTPPost();
+const httpFetch = new HTTPFetch();
 
 export default class CreateAccountForm extends React.Component {
 
@@ -26,9 +28,8 @@ export default class CreateAccountForm extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log('The title is ' + this.titleInput.value);
-        httpPost.postUserDataToBackend(this.usernameInput.value, this.passwordInput.value);
         event.preventDefault();
+        httpPost.postUserDataToBackend(this.usernameInput.value, this.passwordInput.value);
     }
 
     componentDidMount() {
