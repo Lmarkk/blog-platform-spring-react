@@ -87,16 +87,9 @@ export default function BlogCards() {
         this.setState({image_path:'new path'});
     };
 
-    const handleCreatePost = () => {
-
-    };
-
 
     return (
         <div>
-            <IconButton className={classes.addIcon} onClick={handleCreatePost}>
-                <AddCircle/>
-            </IconButton>
         <Form/>
         <div className={classes.root}>
         <Card>
@@ -120,6 +113,7 @@ export default function BlogCards() {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
+
                 <IconButton>
                     <ThumbUp/>
                 </IconButton>
@@ -128,7 +122,7 @@ export default function BlogCards() {
                     13
                 </Typography>
 
-                <IconButton >
+                <IconButton>
                     <ThumbDown />
                 </IconButton>
 
