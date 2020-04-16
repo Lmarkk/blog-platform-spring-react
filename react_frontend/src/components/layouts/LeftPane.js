@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -11,13 +11,12 @@ import Typography from '@material-ui/core/Typography';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ThumbDown from '@material-ui/icons/ThumbDown';
-import AddCircle from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import HTTPFetch from "../../HTTPFetch";
 import HTTPPost from "../../HTTPPost";
-import TextField from '@material-ui/core/TextField';
-
+import {Form} from './Form';
+import AddCircle from '@material-ui/icons/AddCircle';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -67,88 +66,31 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function BlogCard() {
+export default function BlogCards() {
+
+
+    const stateClass = new Form();
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const today = new Date();
+    const todayDate = today.getDate() + "/"+ parseInt(today.getMonth()+1) +"/"+ today.getFullYear();
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
-    const handleDateChange = date => {
-        setSelectedDate(date);
-    };
-
-    const [selectedDate, setSelectedDate] = React.useState(new Date(''));
     const httpPost = new HTTPPost();
     const httpFetch = new HTTPFetch();
 
+
+    const changeColorGreen = () => {
+        this.setState({image_path:'new path'});
+    };
+
+
     return (
         <div>
-        <div className={classes.root}>
-            <IconButton className={classes.addIcon} onClick={httpFetch.fetchDataFromBackend}>
-                <AddCircle/>
-            </IconButton>
-            <Card>
-                <TextField required id={"standard-required"} defaultValue="Title" className={classes.headerTextField} inputProps={{min: 0, style: { textAlign: 'center' }}} />
-                <CardHeader className={classes.cardHeader} subheader='October 29, 2018'/>
-                <img
-                    className={classes.media}
-                    src={require('../images/nature.jpg')} alt={'cannot display'}
-                />
-                <CardContent>
-                    <TextField required id={"standard-required"}   />
-                </CardContent>
-                <CardActions disableSpacing>
-                    <IconButton aria-label='add to favorites'>
-                        <ThumbUp/>
-                    </IconButton>
-                    <IconButton aria-label='share'>
-                        <ThumbDown />
-                    </IconButton>
-                    <IconButton
-                        className={clsx(classes.expand, {
-                            [classes.expandOpen]: expanded,
-                        })}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label='show more'
-                    >
-                        <ExpandMoreIcon />
-                    </IconButton>
-                </CardActions>
-                <Collapse in={expanded} timeout='auto' unmountOnExit>
-                    <CardContent>
-                        <Typography paragraph>Lorem ipsum:</Typography>
-                        <Typography paragraph>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada, dolor sed tincidunt fringilla, nisl magna lobortis orci, id accumsan
-                            elit nibh sed purus. In sed suscipit nunc. Integer tortor eros, rhoncus et turpis in, vehicula maximus sapien.
-                            Vivamus interdum nunc quis felis dictum, eu iaculis mi fringilla. Phasellus vitae consectetur mauris. Mauris eu auctor massa,
-                            quis aliquam ligula. Duis varius dui massa, ut euismod velit viverra nec. Etiam quis diam eu lectus pretium interdum. Integer eget nunc nisl.
-                            Sed id posuere tortor. Praesent quis laoreet eros, in varius mi. Curabitur pulvinar vehicula arcu, ut eleifend velit porttitor et. Vivamus auctor
-                            ultricies convallis. Praesent non ornare ipsum. Nam condimentum mi vel velit pharetra, venenatis rhoncus risus rutrum.
-                        </Typography>
-                        <Typography paragraph>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada, dolor sed tincidunt fringilla, nisl magna lobortis orci, id accumsan
-                            elit nibh sed purus. In sed suscipit nunc. Integer tortor eros, rhoncus et turpis in, vehicula maximus sapien.
-                            Vivamus interdum nunc quis felis dictum, eu iaculis mi fringilla. Phasellus vitae consectetur mauris. Mauris eu auctor massa,
-                            quis aliquam ligula. Duis varius dui massa, ut euismod velit viverra nec. Etiam quis diam eu lectus pretium interdum. Integer eget nunc nisl.
-                            Sed id posuere tortor. Praesent quis laoreet eros, in varius mi. Curabitur pulvinar vehicula arcu, ut eleifend velit porttitor et. Vivamus auctor
-                            ultricies convallis. Praesent non ornare ipsum. Nam condimentum mi vel velit pharetra, venenatis rhoncus risus rutrum.
-                        </Typography>
-                        <Typography paragraph>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada, dolor sed tincidunt fringilla, nisl magna lobortis orci, id accumsan
-                            elit nibh sed purus. In sed suscipit nunc. Integer tortor eros, rhoncus et turpis in, vehicula maximus sapien.
-                            Vivamus interdum nunc quis felis dictum, eu iaculis mi fringilla. Phasellus vitae consectetur mauris. Mauris eu auctor massa,
-                            quis aliquam ligula. Duis varius dui massa, ut euismod velit viverra nec. Etiam quis diam eu lectus pretium interdum. Integer eget nunc nisl.
-                            Sed id posuere tortor. Praesent quis laoreet eros, in varius mi. Curabitur pulvinar vehicula arcu, ut eleifend velit porttitor et. Vivamus auctor
-                            ultricies convallis. Praesent non ornare ipsum. Nam condimentum mi vel velit pharetra, venenatis rhoncus risus rutrum.
-                        </Typography>
-                    </CardContent>
-                </Collapse>
-            </Card>
-        </div>
-
+        <Form/>
         <div className={classes.root}>
         <Card>
             <IconButton className={classes.cardIcons}>
@@ -171,12 +113,23 @@ export default function BlogCard() {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label='add to favorites'>
+
+                <IconButton>
                     <ThumbUp/>
                 </IconButton>
-                <IconButton aria-label='share'>
+
+                <Typography>
+                    13
+                </Typography>
+
+                <IconButton>
                     <ThumbDown />
                 </IconButton>
+
+                <Typography>
+                    13
+                </Typography>
+
                 <IconButton
                     className={clsx(classes.expand, {
                         [classes.expandOpen]: expanded,

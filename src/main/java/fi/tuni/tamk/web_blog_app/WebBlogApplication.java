@@ -23,13 +23,13 @@ public class WebBlogApplication {
 			logger.info("------------");
 			logger.info("INSTRUCTIONS");
 			logger.info("------------");
-			logger.info("GET all locations");
+			logger.info("GET all blogposts");
 			logger.info("    curl -X GET " + SERVER + URL);
 			// logger.info("GET one location");
 			// logger.info("    curl -X GET " + SERVER + URL + "1");
 			// logger.info("DELETE one location");
 			// logger.info("    curl -X DELETE " + SERVER + URL + "1");
-			logger.info("POST one location");
+			logger.info("POST one blogpost");
 			logger.info("    curl -X POST -H \"Content-type: application/json\" -d \"{\"title\": \"test\"," +
 					"\"date\": \"2020.01.01\"," +
 					"\"description\": \"test\"," +

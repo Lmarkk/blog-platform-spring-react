@@ -4,7 +4,7 @@ import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
 
 const styles = {
-    Paper: {
+    PaperRight: {
         marginTop: 10, marginBottom: 10
     },
     PaperLeft: {
@@ -20,7 +20,7 @@ export default function Panes() {
                     <LeftPane style={styles.PaperLeft}/>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <RightPane style={styles.Paper}/>
+                    <RightPane style={styles.PaperRight}/>
                 </Grid>
             </Grid>
         )
