@@ -3,9 +3,13 @@ import { Paper } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
+    root: {
+        backgroundColor: 'white',
+        height: '100%'
+    },
     first: {
         marginRight: 50,
-        marginTop: 140,
+        marginTop: 50,
         marginLeft: 50,
         padding: 0
     },
@@ -19,7 +23,7 @@ const styles = {
 
 export default function rightSide() {
     return (
-        <div>
+        <div style={styles.root}>
             <Paper style={styles.first}>
                 <fieldset>
                     <legend>Recent likes</legend>
