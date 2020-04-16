@@ -1,4 +1,4 @@
-package fi.tuni.tamk.web_blog_app;
+package fi.tuni.tamk.web_blog_app.blogpost;
 
 public class BlogPostRequestModel {
     private String title;
