@@ -5,7 +5,7 @@ class HTTPPost extends React.Component {
         super(props);
     }
 
-    postDataToBackend(title, date, description, content) {
+    postBlogDataToBackend(title, date, description, content) {
         const apiUrl = `http://localhost:8080/blogposts`;
         const conf = {method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -14,6 +14,21 @@ class HTTPPost extends React.Component {
                 date: date,
                 description: description,
                 content: content
+            })};
+
+        console.log(conf);
+
+        fetch(apiUrl, conf)
+            .then(response => response.json())
+    }
+
+    postUserDataToBackend(username, password) {
+        const apiUrl = `http://localhost:8080/users`;
+        const conf = {method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                username: username,
+                password: password
             })};
 
         console.log(conf);
