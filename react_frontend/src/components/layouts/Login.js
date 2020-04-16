@@ -27,9 +27,9 @@ export default class LoginForm extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log('The title is ' + this.titleInput.value);
-        httpFetch.fetchUserDataFromBackend(this.titleInput.value, this.contentInput.value);
         event.preventDefault();
+        //httpFetch.fetchUserDataFromBackend(this.titleInput.value, this.contentInput.value);
+
     }
 
     componentDidMount() {
@@ -68,7 +68,7 @@ export default class LoginForm extends React.Component {
                         />
                         <CardContent>
                             <div style={{textAlign: 'center', marginTop: 30}}>
-                                <Button type="submit" value="submit" variant="contained">Login</Button>
+                                <Button type="submit" value="submit" onClick={httpFetch.fetchBlogDataFromBackend} variant="contained">Login</Button>
                             </div>
                         </CardContent>
                     </Card>
