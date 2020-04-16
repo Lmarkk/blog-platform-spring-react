@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class ModUserData {
     private Long id;
-    private String userName;
+    private String username;
     private ArrayList<Long> likedBlogPostIds = new ArrayList<>();
     private ArrayList<Long> dislikedBlogPostIds = new ArrayList<>();
 
@@ -17,7 +17,7 @@ public class ModUserData {
              ArrayList<Long> likedPosts,
              ArrayList<Long> dislikedPosts) {
         this.id = id;
-        this.userName = userName;
+        this.username = userName;
 
         this.likedBlogPostIds = likedPosts;
         this.dislikedBlogPostIds = dislikedPosts;
