@@ -1,3 +1,5 @@
+
+/*
 package fi.tuni.tamk.web_blog_app;
 
 import org.springframework.context.annotation.Configuration;
@@ -14,3 +16,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         security.httpBasic().disable();
     }
 }
+
+
+ */
