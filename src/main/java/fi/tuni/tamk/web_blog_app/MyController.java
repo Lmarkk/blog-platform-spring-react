@@ -25,6 +25,29 @@ public class MyController {
     }
 
     @CrossOrigin
+    @GetMapping("/users")
+    List<ModUserData> getAllUsers() {
+        List<ModUserData> returnValue = new ArrayList<>();
+        for(UserData user: userDataRepository.findAll()) {
+            returnValue.add(new ModUserData(user.getId(),
+                    user.getUserName(),
+                    user.getLikedBlogPostIds(),
+                    user.getDislikedBlogPostIds()));
+        }
+        return returnValue;
+    }
+
+    @CrossOrigin
+    @GetMapping("/test")
+    List<String> getPassWord() {
+        List<String> returnValue = new ArrayList<>();
+        for(UserData user: userDataRepository.findAll()) {
+            returnValue.add(user.getPassWord());
+        }
+        return returnValue;
+    }
+
+    @CrossOrigin
     @PostMapping("/blogposts")
     void saveBlogPost(@RequestBody BlogPostRequestModel blogPostRequestModel) {
         blogPostRepository.save(new BlogPost(blogPostRequestModel.getTitle(),
