@@ -17,6 +17,7 @@ import HTTPFetch from "../../HTTPFetch";
 import HTTPPost from "../../HTTPPost";
 import {Form} from './Form';
 import AddCircle from '@material-ui/icons/AddCircle';
+import BlogpostCreator from "./BlogpostCreator";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -82,10 +83,15 @@ export default function BlogCards() {
     const httpPost = new HTTPPost();
     const httpFetch = new HTTPFetch();
 
-
-    const changeColorGreen = () => {
-        this.setState({image_path:'new path'});
+    const loadBlogPostsFromBackend = () => {
+        httpFetch.fetchBlogDataFromBackend((data) => {
+             for(let i = 0; i < data.length; i++) {
+                 BlogpostCreator(data[i].id, data[i].title, data[i].date, data[i].description, data[i].content);
+             }
+        })
     };
+
+    loadBlogPostsFromBackend();
 
 
     return (
@@ -172,6 +178,7 @@ export default function BlogCards() {
             </Collapse>
         </Card>
         </div>
+            <BlogpostCreator/>
         </div>
     );
 }
