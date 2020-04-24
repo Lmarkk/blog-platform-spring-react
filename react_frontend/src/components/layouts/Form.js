@@ -6,6 +6,7 @@ import HTTPPost from '../../HTTPPost';
 import TextField from "@material-ui/core/TextField";
 import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
+import {Image} from "@material-ui/icons";
 
 const httpPost = new HTTPPost();
 const today = new Date();
@@ -16,11 +17,17 @@ const useStyles = makeStyles(theme => ({
         width: 100,
         height: 150,
         padding: 1
-    }
+    },
+    media: {
+        height: '100%',
+        display: 'block',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '100%',
+    },
 }));
 
 export class Form extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -31,6 +38,8 @@ export class Form extends React.Component {
     handleSubmit(event) {
         console.log('The title is ' + this.titleInput.value);
         httpPost.postBlogDataToBackend(this.titleInput.value, todayDate, this.descriptionInput.value, this.contentInput.value);
+        //this.insertImage();
+        this.dynamicUrl();
         event.preventDefault();
     }
 
@@ -41,6 +50,19 @@ export class Form extends React.Component {
     componentWillUnmount() {
         console.log("Unmounted");
     }
+
+    insertImage(){
+        document.getElementById("titleImage").src = this.imageInput
+    }
+
+     dynamicUrl() {
+         const url = this.imageInput;
+         const img = document.createElement("titleImage");
+         img.src = url;
+         document.body.appendChild(img);
+    }
+
+
 
     render() {
         return (
@@ -65,7 +87,17 @@ export class Form extends React.Component {
                         multiline
                         label="Image URL"
                         type="text"
-                        inputRef={(descriptionInput) => this.descriptionInput = descriptionInput} />
+                        inputRef={(imageInput) => this.imageInput = imageInput} />
+
+                    <img
+                        id="titleImage"
+                        style={{ height: '100%',
+                            display: 'block',
+                            paddingTop: 10,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            width: '100%'}}
+                    />
 
                     <CardHeader style={{textAlign: 'center'}}
                     />
