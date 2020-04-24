@@ -18,7 +18,6 @@ export default class Home extends React.Component{
                 <img style={styles.paperContainer} src={require("../images/panorama.jpg")} alt={"cannot display"}>
                 </img>
             </div>
-
         )
     }
 }
