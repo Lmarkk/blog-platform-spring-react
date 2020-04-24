@@ -7,11 +7,11 @@ class HTTPFetch extends React.Component {
         super(props);
     }
 
-    fetchBlogDataFromBackend() {
+    fetchBlogDataFromBackend(f) {
         const apiUrl = `http://localhost:8080/blogposts`;
         fetch(apiUrl)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => f(data))
             .catch(err => console.log(err));
     }
 
@@ -30,6 +30,7 @@ class HTTPFetch extends React.Component {
             .then(data => console.log(data))
             .catch(err => console.log(err));
     }
+
 }
 
 export default HTTPFetch;
