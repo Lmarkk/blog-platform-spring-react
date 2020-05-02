@@ -20,6 +20,7 @@ import AddCircle from '@material-ui/icons/AddCircle';
 import BlogpostCreator from "./BlogpostCreator";
 
 const useStyles = makeStyles(theme => ({
+
     root: {
         maxWidth: 1500,
         paddingTop: 10,
@@ -71,10 +72,19 @@ export default function BlogCards() {
 
 
     const stateClass = new Form();
+    let element;
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const today = new Date();
     const todayDate = today.getDate() + "/"+ parseInt(today.getMonth()+1) +"/"+ today.getFullYear();
+    let tempId;
+    let tempTitle;
+    let tempDate;
+    let tempDescription;
+    let tempContent;
+
+    let lassinTesti = [{id: "test", title: "test", date: "test", description: "test", content: "test"}];
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -83,22 +93,31 @@ export default function BlogCards() {
     const httpPost = new HTTPPost();
     const httpFetch = new HTTPFetch();
 
-    const loadBlogPostsFromBackend = () => {
-        httpFetch.fetchBlogDataFromBackend((data) => {
-             for(let i = 0; i < data.length; i++) {
-                 BlogpostCreator(data[i].id, data[i].title, data[i].date, data[i].description, data[i].content);
-             }
-        })
+    const changeGreen = () => {
+        let x = document.getElementById("thumbUp1");
+        x.style.color = 'green';
     };
 
-    loadBlogPostsFromBackend();
+    const changeRed = () => {
+        let x = document.getElementById("thumbDown1");
+        x.style.color = 'red';
+    };
+/*
+    const removeElement = () => {
+        for(let i = 0; i < blogDataArray.length; i++) {
+            if (blogDataArray[i].id === document.getElementById(i)) {
 
+            }
+        }
+    };
+
+ */
 
     return (
         <div>
         <Form/>
         <div className={classes.root}>
-        <Card>
+        <Card id={1}>
             <IconButton className={classes.cardIcons}>
                 <EditIcon/>
             </IconButton>
@@ -111,7 +130,7 @@ export default function BlogCards() {
             />
             <img
                 className={classes.media}
-                src={require('../images/nature.jpg')} alt={'cannot display'}
+                src={'https://i.imgur.com/wuIIg6A.jpg'}
             />
             <CardContent>
                 <Typography variant='body1' color='textSecondary'>
@@ -120,7 +139,7 @@ export default function BlogCards() {
             </CardContent>
             <CardActions disableSpacing>
 
-                <IconButton>
+                <IconButton id={'thumbUp1'} onClick={changeGreen}>
                     <ThumbUp/>
                 </IconButton>
 
@@ -128,7 +147,7 @@ export default function BlogCards() {
                     13
                 </Typography>
 
-                <IconButton>
+                <IconButton id={'thumbDown1'} onClick={changeRed}>
                     <ThumbDown />
                 </IconButton>
 
@@ -178,7 +197,9 @@ export default function BlogCards() {
             </Collapse>
         </Card>
         </div>
-            <BlogpostCreator/>
+            {
+                BlogpostCreator()
+            }
         </div>
     );
 }
