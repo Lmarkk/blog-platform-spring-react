@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import {Image} from "@material-ui/icons";
+import InputLabel from '@material-ui/core/InputLabel';
 
 const httpPost = new HTTPPost();
 const today = new Date();
@@ -38,7 +39,6 @@ export class Form extends React.Component {
     handleSubmit(event) {
         console.log('The title is ' + this.titleInput.value);
         httpPost.postBlogDataToBackend(this.titleInput.value, todayDate, this.descriptionInput.value, this.contentInput.value);
-        //this.insertImage();
         this.dynamicUrl();
         event.preventDefault();
     }
@@ -71,19 +71,20 @@ export class Form extends React.Component {
                 <Card >
                     <TextField
                         id="standard-multiline-flexible"
-                        style={{marginLeft: 35, paddingRight: 80}}
+                        style={{marginLeft: 35, paddingRight: 80, marginTop: 10}}
                         name="title"
                         fullWidth={true}
-                        multiline
+                        InputLabelProps={{ shrink: true }}
                         label="Title"
                         type="text"
                         inputRef={(titleInput) => this.titleInput = titleInput} />
 
                         <TextField
                         id="standard-multiline-flexible"
-                        style={{marginLeft: 35, paddingRight: 80}}
+                        style={{marginLeft: 35, paddingRight: 80, marginTop: 10}}
                         name="Image URL"
                         fullWidth={true}
+                        InputLabelProps={{ shrink: true }}
                         multiline
                         label="Image URL"
                         type="text"
@@ -108,6 +109,7 @@ export class Form extends React.Component {
                             style={{marginLeft: 20, paddingRight: 50}}
                             name="description"
                             fullWidth={true}
+                            InputLabelProps={{ shrink: true }}
                             multiline
                             label="Description"
                             type="text"
@@ -120,6 +122,7 @@ export class Form extends React.Component {
                                 name="content"
                                 label="Content"
                                 fullWidth={true}
+                                InputLabelProps={{ shrink: true }}
                                 multiline
                                 type="text"
                                 inputRef={(contentInput) => this.contentInput = contentInput} />
