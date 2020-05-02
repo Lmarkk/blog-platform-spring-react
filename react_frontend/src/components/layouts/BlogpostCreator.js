@@ -64,81 +64,104 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function BlogpostCreator(id, title, date, description, content) {
+export default function BlogpostCreator() {
 
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
-
+    let blogDataArray = [];
+    const httpFetch = new HTTPFetch();
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
-    const blogpostId = id;
-    const blogpostTitle = title;
-    const blogpostDate = date;
-    const blogpostDescription = description;
-    const blogpostContent = content;
+    const loadBlogPostsFromBackend = () => {
+        httpFetch.fetchBlogDataFromBackend((data) => {
+            for(let i = 0; i < data.length; i++) {
+                blogDataArray.push(data[i]);
+            }
+        })
+    };
+
+    loadBlogPostsFromBackend();
+
+    window.onload = function() {
+        updateTitleAndDate();
+        function updateTitleAndDate() {
+            let cardBase = document.getElementById('cardheader');
+
+        }
+    };
 
     return (
-       <div>
-           <Card>
-               <IconButton className={classes.cardIcons}>
-                   <EditIcon/>
-               </IconButton>
-               <IconButton className={classes.cardIcons}>
-                   <DeleteIcon/>
-               </IconButton>
-               <CardHeader className={classes.cardHeader}
-                           title='My first blog post!'
-                           subheader='October 29, 2018'
-               />
-               <img
-                   className={classes.media}
-                   src={require('../images/nature.jpg')} alt={'cannot display'}
-               />
-               <CardContent>
-                   <Typography variant='body1' color='textSecondary'>
-                       I took this picture yesterday and I'm so happy how it turned out!
-                   </Typography>
-               </CardContent>
-               <CardActions disableSpacing>
+       <div className={classes.root}>
+           {
+               blogDataArray.map((data, index) => {
+                   return (
+                   <div key={index}>
+                       {data}
+                       <!--
+                       <Card>
+                           <IconButton className={classes.cardIcons}>
+                               <EditIcon/>
+                           </IconButton>
+                           <IconButton className={classes.cardIcons}>
+                               <DeleteIcon/>
+                           </IconButton>
+                           <CardHeader className={classes.cardHeader}
+                                       id="cardheader"
+                           />
+                           <img
+                               className={classes.media}
+                               src='https://i.imgur.com/qcJQtBi.png'
+                           />
+                           <CardContent>
+                               <Typography variant='body1' color='textSecondary'>
+                                   I took this picture yesterday and I'm so happy how it turned out!
+                               </Typography>
+                           </CardContent>
+                           <CardActions disableSpacing>
 
-                   <IconButton>
-                       <ThumbUp/>
-                   </IconButton>
+                               <IconButton>
+                                   <ThumbUp/>
+                               </IconButton>
 
-                   <Typography>
-                       13
-                   </Typography>
+                               <Typography>
+                                   13
+                               </Typography>
 
-                   <IconButton>
-                       <ThumbDown />
-                   </IconButton>
+                               <IconButton>
+                                   <ThumbDown />
+                               </IconButton>
 
-                   <Typography>
-                       13
-                   </Typography>
+                               <Typography>
+                                   13
+                               </Typography>
 
-                   <IconButton
-                       className={clsx(classes.expand, {
-                           [classes.expandOpen]: expanded,
-                       })}
-                       onClick={handleExpandClick}
-                       aria-expanded={expanded}
-                       aria-label='show more'
-                   >
-                       <ExpandMoreIcon />
-                   </IconButton>
-               </CardActions>
-               <Collapse in={expanded} timeout='auto' unmountOnExit>
-                   <CardContent>
-                       <Typography>
+                               <IconButton
+                                   className={clsx(classes.expand, {
+                                       [classes.expandOpen]: expanded,
+                                   })}
+                                   onClick={handleExpandClick}
+                                   aria-expanded={expanded}
+                                   aria-label='show more'
+                               >
+                                   <ExpandMoreIcon />
+                               </IconButton>
+                           </CardActions>
+                           <Collapse in={expanded} timeout='auto' unmountOnExit>
+                               <CardContent>
+                                   <Typography>
 
-                       </Typography>
-                   </CardContent>
-               </Collapse>
-           </Card>
+                                   </Typography>
+                               </CardContent>
+                           </Collapse>
+                       </Card>
+-->
+                   </div>
+                   )
+               })
+           }
        </div>
-    );
+);
 }
