@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
     root: {
         backgroundColor: 'white',
-        height: '100%'
+        height: '98%',
     },
     first: {
         marginRight: 50,
