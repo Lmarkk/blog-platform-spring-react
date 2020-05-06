@@ -1,8 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, Component} from 'react'
 import HTTPFetch from "../../HTTPFetch";
-import HTTPPost from "../../HTTPPost";
 import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,158 +8,124 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import ThumbUp from "@material-ui/icons/ThumbUp";
 import ThumbDown from "@material-ui/icons/ThumbDown";
-import clsx from "clsx";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Collapse from "@material-ui/core/Collapse";
 import Card from "@material-ui/core/Card";
-import {makeStyles} from "@material-ui/core/styles";
+import HTTPPost from "../../HTTPPost";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        maxWidth: 1500,
-        paddingTop: 10,
-        marginTop: 40,
-        marginLeft: 35,
-        marginRight: 35
-    },
-    cardHeader: {
-        textAlign: 'center',
-        marginLeft: 96
-    },
-    media: {
-        height: '100%',
-        display: 'block',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        width: '100%',
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    addIcon: {
-        marginBottom: 40,
-        margin: 'auto',
-        display: 'block'
-    },
-    cardIcons: {
-        float: 'right',
-        display: 'block',
-        marginRight: 0,
-        clear: 'left'
-    },
-    headerTextField: {
-        display: 'block',
-        alignContent: 'center',
-        marginTop: 10,
-        marginLeft: 10
+
+class BlogpostCreator extends React.Component {
+
+    index = 0;
+    likes = 0;
+    dislikes = 0;
+    imageURL;
+    howManyPosts = 0;
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            blogPostData: null,
+        };
+
+        this.expand = {
+            expanded: false,
+            setExpanded: false
+        };
+
+        this.httpFetch = new HTTPFetch();
+        this.httpPost = new HTTPPost();
     }
-}));
 
-export default function BlogpostCreator() {
+    componentDidMount() {
+        this.interval = setInterval(() => {
+            this.httpFetch.fetchBlogDataFromBackend((data) => {
+                this.index = data.length - 1;
+                this.setState({ blogPostData: data });
+            })
+        }, 2000);
+    }
 
-    const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-    let blogDataArray = [];
-    const httpFetch = new HTTPFetch();
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    deletePost(id) {
+        console.log(id + " DELETEPOSTISTA")
+        this.httpPost.deleteBlogDataFromBackend(id);
+    }
+
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    changeGreen() {
+        let x = document.getElementById("thumbUp");
+        x.style.color = 'green';
+        this.likes += 1;
     };
 
-    const loadBlogPostsFromBackend = () => {
-        httpFetch.fetchBlogDataFromBackend((data) => {
-            for(let i = 0; i < data.length; i++) {
-                blogDataArray.push(data[i]);
-            }
-        })
+    changeRed() {
+        let x = document.getElementById("thumbDown");
+        x.style.color = 'red';
+        this.dislikes += 1;
     };
 
-    loadBlogPostsFromBackend();
 
-    window.onload = function() {
-        updateTitleAndDate();
-        function updateTitleAndDate() {
-            let cardBase = document.getElementById('cardheader');
+    render() {
+        const { blogPostData } = this.state;
 
+        if (this.state.blogPostData === null || Object.keys(this.state.blogPostData).length === 0 ||  blogPostData === null || typeof(blogPostData[this.props.arrayIndex]) === "undefined") {
+            return null
+        } else {
+            console.log(blogPostData[this.props.arrayIndex] + " blogpostdata");
+
+            return (
+                <div className='root'>
+                        <Card>
+                            <IconButton className='addIcon' onClick={() => this.deletePost(blogPostData[this.props.arrayIndex].id)}>
+                                <DeleteIcon/>
+                            </IconButton>
+                            <CardHeader className='cardHeader'
+                                        title={blogPostData[this.props.arrayIndex].title}
+                                        subheader={blogPostData[this.props.arrayIndex].date}
+                            />
+                            <img
+                                id="inputImage"
+                                className='media'
+                                src={blogPostData[this.props.arrayIndex].imageURL}
+                            />
+                            <CardContent>
+                                <Typography variant='body1' color='textSecondary'>
+                                    {blogPostData[this.props.arrayIndex].description}
+                                </Typography>
+                            </CardContent>
+                            <CardActions disableSpacing>
+
+                                <IconButton id={"thumbUp"} onClick={this.changeGreen}>
+                                    <ThumbUp/>
+                                </IconButton>
+
+                                <Typography>
+                                    {this.likes}
+                                </Typography>
+
+                                <IconButton id={"thumbDown"} onClick={this.changeRed}>
+                                    <ThumbDown />
+                                </IconButton>
+
+                                <Typography>
+                                    {this.dislikes}
+                                </Typography>
+
+                            </CardActions>
+                                <CardContent>
+                                    <Typography style={{ wordWrap: "break-word" }}>
+                                        {blogPostData[this.props.arrayIndex].content}
+                                    </Typography>
+                                </CardContent>
+                        </Card>
+                </div>
+            );
         }
-    };
-
-    return (
-       <div className={classes.root}>
-           {
-               blogDataArray.map((data, index) => {
-                   return (
-                   <div key={index}>
-                       {data}
-                       <!--
-                       <Card>
-                           <IconButton className={classes.cardIcons}>
-                               <EditIcon/>
-                           </IconButton>
-                           <IconButton className={classes.cardIcons}>
-                               <DeleteIcon/>
-                           </IconButton>
-                           <CardHeader className={classes.cardHeader}
-                                       id="cardheader"
-                           />
-                           <img
-                               className={classes.media}
-                               src='https://i.imgur.com/qcJQtBi.png'
-                           />
-                           <CardContent>
-                               <Typography variant='body1' color='textSecondary'>
-                                   I took this picture yesterday and I'm so happy how it turned out!
-                               </Typography>
-                           </CardContent>
-                           <CardActions disableSpacing>
-
-                               <IconButton>
-                                   <ThumbUp/>
-                               </IconButton>
-
-                               <Typography>
-                                   13
-                               </Typography>
-
-                               <IconButton>
-                                   <ThumbDown />
-                               </IconButton>
-
-                               <Typography>
-                                   13
-                               </Typography>
-
-                               <IconButton
-                                   className={clsx(classes.expand, {
-                                       [classes.expandOpen]: expanded,
-                                   })}
-                                   onClick={handleExpandClick}
-                                   aria-expanded={expanded}
-                                   aria-label='show more'
-                               >
-                                   <ExpandMoreIcon />
-                               </IconButton>
-                           </CardActions>
-                           <Collapse in={expanded} timeout='auto' unmountOnExit>
-                               <CardContent>
-                                   <Typography>
-
-                                   </Typography>
-                               </CardContent>
-                           </Collapse>
-                       </Card>
--->
-                   </div>
-                   )
-               })
-           }
-       </div>
-);
+    }
 }
+
+export default BlogpostCreator;
