@@ -7,8 +7,6 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Link from '@material-ui/core/Link';
 import Button from "@material-ui/core/Button";
-import HTTPFetch from "../../HTTPFetch";
-import Search from "./Search";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -68,8 +66,6 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-//const search = new Search();
-
 export default function SearchAppBar() {
     const classes = useStyles();
     const preventDefault = event => event.preventDefault();
@@ -79,7 +75,7 @@ export default function SearchAppBar() {
             <AppBar position='fixed' className={classes.color}>
                 <Toolbar>
                     <Typography className={classes.title} variant='h6' noWrap>
-                        <Link style={{display: 'table-cell', color:'inherit', textDecoration:'none'}} href='http://localhost:3000'>SuperBlogger3000</Link>
+                        <Link style={{display: 'table-cell', color:'inherit', textDecoration:'none'}} href='http://localhost:3000'>OneDolah</Link>
                     </Typography>
                     <Button color="inherit" href={'/createaccount'}>Create account</Button>
                     <Button color="inherit" href={'/login'}>Login</Button>
