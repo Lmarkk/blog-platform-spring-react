@@ -15,6 +15,7 @@ public class BlogPost {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String title;
     private String date;
+    private String imageURL;
     private String description;
     private int likes;
     private int dislikes;
@@ -42,6 +43,14 @@ public class BlogPost {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getDescription() {
@@ -80,12 +89,14 @@ public class BlogPost {
 
     public BlogPost(String title,
                     String date,
+                    String imageURL,
                     String description,
                     int likes,
                     int dislikes,
                     String content) {
         this.title = title;
         this.date = date;
+        this.imageURL = imageURL;
         this.description = description;
         this.likes = likes;
         this.dislikes = dislikes;
