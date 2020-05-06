@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
     root: {
         backgroundColor: 'white',
-        height: '98%',
+        height: '100%',
     },
     first: {
         marginRight: 50,
@@ -17,7 +17,7 @@ const styles = {
         marginRight: 50,
         marginTop: 50,
         marginLeft: 50,
-        padding: 0
+        paddingBottom: 10
     }
 };
 
