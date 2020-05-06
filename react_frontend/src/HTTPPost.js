@@ -5,13 +5,14 @@ class HTTPPost extends React.Component {
         super(props);
     }
 
-    postBlogDataToBackend(title, date, description, content) {
+    postBlogDataToBackend(title, date, imageURL, description, content) {
         const apiUrl = `http://localhost:8080/blogposts`;
         const conf = {method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 title: title,
                 date: date,
+                imageURL: imageURL,
                 description: description,
                 content: content
             })};
@@ -20,6 +21,13 @@ class HTTPPost extends React.Component {
 
         fetch(apiUrl, conf)
             .then(response => response.json())
+    }
+
+    deleteBlogDataFromBackend(id) {
+        const apiUrl = `http://localhost:8080/blogposts/${id}`;
+        const conf = {method: 'DELETE'};
+
+        fetch(apiUrl, conf).then(response => response.json());
     }
 
     postUserDataToBackend(username, password) {
@@ -34,7 +42,7 @@ class HTTPPost extends React.Component {
         console.log(conf);
 
         fetch(apiUrl, conf)
-            .then(response => response.json())
+            .then(response => response.json());
     }
 }
 
