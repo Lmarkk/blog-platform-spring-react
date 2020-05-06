@@ -6,8 +6,6 @@ import HTTPPost from '../../HTTPPost';
 import TextField from "@material-ui/core/TextField";
 import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
-import {Image} from "@material-ui/icons";
-import InputLabel from '@material-ui/core/InputLabel';
 
 const httpPost = new HTTPPost();
 const today = new Date();
@@ -38,17 +36,16 @@ export class Form extends React.Component {
 
     handleSubmit(event) {
         console.log('The title is ' + this.titleInput.value);
-        httpPost.postBlogDataToBackend(this.titleInput.value, todayDate, this.descriptionInput.value, this.contentInput.value);
-        this.dynamicUrl();
+        httpPost.postBlogDataToBackend(this.titleInput.value, todayDate, this.imageInput.value, this.descriptionInput.value, this.contentInput.value);
         event.preventDefault();
     }
 
     componentDidMount() {
-        console.log("Mounted");
+       // console.log("Mounted");
     }
 
     componentWillUnmount() {
-        console.log("Unmounted");
+       // console.log("Unmounted");
     }
 
     insertImage(){
@@ -63,7 +60,6 @@ export class Form extends React.Component {
     }
 
 
-
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
@@ -75,6 +71,8 @@ export class Form extends React.Component {
                         name="title"
                         fullWidth={true}
                         InputLabelProps={{ shrink: true }}
+                        maxLength="255"
+                        inputProps={{maxLength: 255}}
                         label="Title"
                         type="text"
                         inputRef={(titleInput) => this.titleInput = titleInput} />
@@ -86,6 +84,8 @@ export class Form extends React.Component {
                         fullWidth={true}
                         InputLabelProps={{ shrink: true }}
                         multiline
+                        maxLength="255"
+                        inputProps={{maxLength: 255}}
                         label="Image URL"
                         type="text"
                         inputRef={(imageInput) => this.imageInput = imageInput} />
@@ -112,6 +112,8 @@ export class Form extends React.Component {
                             InputLabelProps={{ shrink: true }}
                             multiline
                             label="Description"
+                            maxLength="255"
+                            inputProps={{maxLength: 255}}
                             type="text"
                             inputRef={(descriptionInput) => this.descriptionInput = descriptionInput} />
                     </CardContent>
@@ -125,6 +127,8 @@ export class Form extends React.Component {
                                 InputLabelProps={{ shrink: true }}
                                 multiline
                                 type="text"
+                                maxLength="255"
+                                inputProps={{maxLength: 255}}
                                 inputRef={(contentInput) => this.contentInput = contentInput} />
                             <div style={{textAlign: 'center', marginTop: 30}}>
                             <Button type="submit" value="submit" variant="contained">Submit</Button>
