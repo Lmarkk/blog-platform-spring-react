@@ -3,6 +3,7 @@ package fi.tuni.tamk.web_blog_app.blogpost;
 public class BlogPostRequestModel {
     private String title;
     private String date;
+    private String imageURL;
     private String description;
     private String content;
 
@@ -29,6 +30,14 @@ public class BlogPostRequestModel {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getDescription() {
