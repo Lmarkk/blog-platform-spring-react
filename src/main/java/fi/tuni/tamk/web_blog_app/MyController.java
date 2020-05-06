@@ -70,10 +70,22 @@ public class MyController {
     List<BlogPost> saveBlogPost(@RequestBody BlogPostRequestModel blogPostRequestModel) {
         blogPostRepository.save(new BlogPost(blogPostRequestModel.getTitle(),
                 blogPostRequestModel.getDate(),
+                blogPostRequestModel.getImageURL(),
                 blogPostRequestModel.getDescription(),
                 0,
                 0,
                 blogPostRequestModel.getContent()));
+
+        return blogPostRepository.findAll();
+    }
+
+
+    @CrossOrigin
+    @DeleteMapping("/blogposts/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    List<BlogPost> deleteBlogPost(@PathVariable Long id) {
+        System.out.println(blogPostRepository.getOne(id));
+        blogPostRepository.delete(blogPostRepository.getOne(id));
 
         return blogPostRepository.findAll();
     }
