@@ -4,20 +4,11 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import HTTPPost from '../../HTTPPost';
 import TextField from "@material-ui/core/TextField";
-import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
-import {lightBlue} from "@material-ui/core/colors";
 import HTTPFetch from "../../HTTPFetch";
 
-const useStyles = makeStyles(theme => ({
-    textArea: {
-        width: 100,
-        height: 150,
-        padding: 1
-    }
-}));
-
 const httpFetch = new HTTPFetch();
+const httpPost = new HTTPPost();
 
 export default class LoginForm extends React.Component {
 
@@ -28,16 +19,7 @@ export default class LoginForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        //httpFetch.fetchUserDataFromBackend(this.titleInput.value, this.contentInput.value);
-
-    }
-
-    componentDidMount() {
-        console.log("Mounted");
-    }
-
-    componentWillUnmount() {
-        console.log("Unmounted");
+        httpPost.login(this.usernameInput.value, this.passwordInput.value);
     }
 
     render() {
