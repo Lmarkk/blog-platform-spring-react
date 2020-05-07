@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -68,7 +68,38 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchAppBar() {
     const classes = useStyles();
-    const preventDefault = event => event.preventDefault();
+    const [searchWord, setSearchWord] = useState('');
+
+
+    const handleInputChange = (event) => {
+        setSearchWord(event.target.value);
+    };
+
+    useEffect(() => {
+        if (searchWord != '') {
+            getData();
+        } else {
+            window.x = [];
+        }
+    }, [searchWord]);
+
+    const logout = () => {
+        sessionStorage.setItem("login", "false");
+        window.location.reload();
+    };
+
+    const getData = () => {
+        const apiURL = `http://localhost:8080/findblogposts`;
+        const conf = {method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                searchWord: searchWord
+            })};
+
+
+        fetch(apiURL, conf).then(response => response.json()).then(data => window.x = data);
+        };
+
 
     return (
         <div className={classes.root}>
@@ -77,14 +108,14 @@ export default function SearchAppBar() {
                     <Typography className={classes.title} variant='h6' noWrap>
                         <Link style={{display: 'table-cell', color:'inherit', textDecoration:'none'}} href='http://localhost:3000'>OneDolah</Link>
                     </Typography>
-                    <Button color="inherit" href={'/createaccount'}>Create account</Button>
+                    <Button color="inherit" onClick={logout}>Logout</Button>
                     <Button color="inherit" href={'/login'}>Login</Button>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
                         <InputBase
-                            //onChange={search.handleInputChange}
+                            onChange={handleInputChange}
                             placeholder='Search…'
                             classes={{
                                 root: classes.inputRoot,
