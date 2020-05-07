@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
-import NavBar from './components/layouts/NavBar'
-import * as serviceWorker from './serviceWorker';
-import TestiLuokka from "./components/layouts/BlogpostCreator";
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

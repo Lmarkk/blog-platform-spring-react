@@ -1,6 +1,5 @@
 import React from "react";
 
-
 class HTTPFetch extends React.Component {
 
     constructor(props) {
