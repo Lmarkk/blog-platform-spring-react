@@ -1,4 +1,5 @@
 import React from "react";
+
 class HTTPPost extends React.Component {
 
     constructor(props) {
@@ -17,8 +18,6 @@ class HTTPPost extends React.Component {
                 content: content
             })};
 
-        console.log(conf);
-
         fetch(apiUrl, conf)
             .then(response => response.json())
     }
@@ -30,8 +29,8 @@ class HTTPPost extends React.Component {
         fetch(apiUrl, conf).then(response => response.json());
     }
 
-    postUserDataToBackend(username, password) {
-        const apiUrl = `http://localhost:8080/users`;
+    login(username, password) {
+        const apiUrl = `http://localhost:8080/login`;
         const conf = {method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -39,10 +38,16 @@ class HTTPPost extends React.Component {
                 password: password
             })};
 
-        console.log(conf);
 
         fetch(apiUrl, conf)
-            .then(response => response.json());
+            .then(response => response.json()).then(data => {
+                if(data === true) {
+                    sessionStorage.setItem("login", "true")
+                } else {
+                    sessionStorage.setItem("login", "false")
+                }
+            }
+        )
     }
 }
 
