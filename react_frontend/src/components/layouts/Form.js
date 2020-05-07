@@ -4,27 +4,11 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import HTTPPost from '../../HTTPPost';
 import TextField from "@material-ui/core/TextField";
-import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 
 const httpPost = new HTTPPost();
 const today = new Date();
 const todayDate = today.getDate() + "/"+ parseInt(today.getMonth()+1) +"/"+ today.getFullYear();
-
-const useStyles = makeStyles(theme => ({
-    textArea: {
-        width: 100,
-        height: 150,
-        padding: 1
-    },
-    media: {
-        height: '100%',
-        display: 'block',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        width: '100%',
-    },
-}));
 
 export class Form extends React.Component {
 
@@ -35,18 +19,10 @@ export class Form extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log('The title is ' + this.titleInput.value);
         httpPost.postBlogDataToBackend(this.titleInput.value, todayDate, this.imageInput.value, this.descriptionInput.value, this.contentInput.value);
         event.preventDefault();
     }
 
-    componentDidMount() {
-       // console.log("Mounted");
-    }
-
-    componentWillUnmount() {
-       // console.log("Unmounted");
-    }
 
     insertImage(){
         document.getElementById("titleImage").src = this.imageInput
@@ -66,7 +42,6 @@ export class Form extends React.Component {
             <div style={{maxWidth: 1500, paddingTop: 10, marginTop: 40, marginLeft: 35, marginRight: 35}}>
                 <Card >
                     <TextField
-                        id="standard-multiline-flexible"
                         style={{marginLeft: 35, paddingRight: 80, marginTop: 10}}
                         name="title"
                         fullWidth={true}
@@ -78,7 +53,6 @@ export class Form extends React.Component {
                         inputRef={(titleInput) => this.titleInput = titleInput} />
 
                         <TextField
-                        id="standard-multiline-flexible"
                         style={{marginLeft: 35, paddingRight: 80, marginTop: 10}}
                         name="Image URL"
                         fullWidth={true}
@@ -105,7 +79,6 @@ export class Form extends React.Component {
 
                     <CardContent>
                         <TextField
-                            id="standard-multiline-flexible"
                             style={{marginLeft: 20, paddingRight: 50}}
                             name="description"
                             fullWidth={true}
@@ -119,7 +92,6 @@ export class Form extends React.Component {
                     </CardContent>
                         <CardContent>
                             <TextField
-                                id="standard-multiline-flexible"
                                 style={{marginLeft: 20, paddingRight: 50}}
                                 name="content"
                                 label="Content"
