@@ -1,4 +1,4 @@
-import React, {useState, Component} from 'react'
+import React from 'react'
 import HTTPFetch from "../../HTTPFetch";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -18,7 +18,6 @@ class BlogpostCreator extends React.Component {
     likes = 0;
     dislikes = 0;
     imageURL;
-    howManyPosts = 0;
 
     constructor(props) {
         super(props);
@@ -34,20 +33,25 @@ class BlogpostCreator extends React.Component {
 
         this.httpFetch = new HTTPFetch();
         this.httpPost = new HTTPPost();
+
+        this.loginData = sessionStorage.getItem("login");
     }
 
     componentDidMount() {
         this.interval = setInterval(() => {
-            this.httpFetch.fetchBlogDataFromBackend((data) => {
-                this.index = data.length - 1;
-                this.setState({ blogPostData: data });
-            })
-        }, 2000);
+            if (window.x === undefined || window.x.length === 0|| window.x === null || typeof(window.x) === "undefined") {
+                this.httpFetch.fetchBlogDataFromBackend((data) => {
+                    this.index = data.length - 1;
+                    this.setState({ blogPostData: data });
+                })
+            } else {
+                this.setState({blogPostData: window.x})
+            }
+        }, 3000);
     }
 
 
     deletePost(id) {
-        console.log(id + " DELETEPOSTISTA")
         this.httpPost.deleteBlogDataFromBackend(id);
     }
 
@@ -59,14 +63,20 @@ class BlogpostCreator extends React.Component {
     changeGreen() {
         let x = document.getElementById("thumbUp");
         x.style.color = 'green';
-        this.likes += 1;
     };
 
     changeRed() {
         let x = document.getElementById("thumbDown");
         x.style.color = 'red';
-        this.dislikes += 1;
     };
+
+    isDisabled() {
+        if (this.loginData === "false" || this.loginData === "undefined" || this.loginData === undefined) {
+            return true
+        } else {
+            return false;
+        }
+    }
 
 
     render() {
@@ -75,12 +85,10 @@ class BlogpostCreator extends React.Component {
         if (this.state.blogPostData === null || Object.keys(this.state.blogPostData).length === 0 ||  blogPostData === null || typeof(blogPostData[this.props.arrayIndex]) === "undefined") {
             return null
         } else {
-            console.log(blogPostData[this.props.arrayIndex] + " blogpostdata");
-
             return (
                 <div className='root'>
                         <Card>
-                            <IconButton className='addIcon' onClick={() => this.deletePost(blogPostData[this.props.arrayIndex].id)}>
+                            <IconButton className='addIcon' disabled={this.isDisabled()} onClick={() => this.deletePost(blogPostData[this.props.arrayIndex].id)}>
                                 <DeleteIcon/>
                             </IconButton>
                             <CardHeader className='cardHeader'
