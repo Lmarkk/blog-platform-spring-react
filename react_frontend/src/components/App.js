@@ -6,7 +6,6 @@ import {lightBlue} from "@material-ui/core/colors";
 import Footer from "./layouts/Footer";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './layouts/Login';
-import CreateAccount from './layouts/CreateAccount';
 
 const styles = {
     backgroundColor: lightBlue
@@ -24,10 +23,6 @@ const login = () => (
   <Login/>
 );
 
-const createAccount = () => (
-    <CreateAccount/>
-);
-
 export default class extends Component {
     render() {
         return (
@@ -36,7 +31,6 @@ export default class extends Component {
                     <Switch>
                         <Route path={"/"} exact component={frontPage}/>
                         <Route path={"/login"} exact component={login}/>
-                        <Route path={"/createaccount"} exact component={createAccount}/>
                     </Switch>
             </Router>
             )
