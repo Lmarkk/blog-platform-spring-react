@@ -13,10 +13,8 @@ export default class BlogCards extends React.Component {
 
         this.httpPost = new HTTPPost();
         this.httpFetch = new HTTPFetch();
-        this.stateClass = new Form();
         this.element = null;
         this.today = new Date();
-        this.todayDate = this.today.getDate() + "/" + parseInt(this.today.getMonth() + 1) + "/" + this.today.getFullYear();
         this.index = 0;
         this.data = 0;
 
@@ -50,7 +48,7 @@ export default class BlogCards extends React.Component {
                         <div>
                             {
                                 [...Array(this.index)].map((x, i) =>
-                                    <div>
+                                    <div key={i}>
                                         <BlogpostCreator key={i} arrayIndex={this.index - i - 1}/>
                                     </div>
                                 )
