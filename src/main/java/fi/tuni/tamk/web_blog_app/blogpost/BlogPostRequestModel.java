@@ -1,10 +1,30 @@
 package fi.tuni.tamk.web_blog_app.blogpost;
 
+/**
+ * Class which represents body of the http request when a new blogpost is created.
+ */
+
 public class BlogPostRequestModel {
+
+    /**
+     * Blogpost title String
+     */
     private String title;
+    /**
+     * Blogpost date String
+     */
     private String date;
+    /**
+     * Blogpost imageURL String
+     */
     private String imageURL;
+    /**
+     * Blogpost description String
+     */
     private String description;
+    /**
+     * Blogpost content String
+     */
     private String content;
 
 
