@@ -7,7 +7,7 @@ class HTTPFetch extends React.Component {
     }
 
     fetchBlogDataFromBackend(f) {
-        const apiUrl = `http://localhost:8080/blogposts`;
+        const apiUrl = `https://onedolah.herokuapp.com/blogposts`;
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => f(data))
@@ -15,7 +15,7 @@ class HTTPFetch extends React.Component {
     }
 
     fetchUserDataFromBackend() {
-        const apiUrl = `http://localhost:8080/users`;
+        const apiUrl = `https://onedolah.herokuapp.com/users`;
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => console.log(data))
@@ -23,7 +23,7 @@ class HTTPFetch extends React.Component {
     }
 
     fetchTest() {
-        const apiUrl = `http://localhost:8080/test`;
+        const apiUrl = `https://onedolah.herokuapp.com/test`;
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => console.log(data))
