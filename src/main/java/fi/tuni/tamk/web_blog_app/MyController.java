@@ -112,11 +112,11 @@ public class MyController {
     @CrossOrigin
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    String login(@RequestBody UserDataRequestModel userDataRequestModel) {
+    Boolean login(@RequestBody UserDataRequestModel userDataRequestModel) {
         if (userDataRequestModel.getUsername().equals("admin") && userDataRequestModel.getPassword().equals("admin")) {
-            return "true";
+            return true;
         } else {
-            return "false";
+            return false;
         }
     }
 }
