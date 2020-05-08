@@ -89,7 +89,7 @@ export default function SearchAppBar() {
     };
 
     const getData = () => {
-        const apiURL = `http://localhost:8080/findblogposts`;
+        const apiURL = `https://onedolah.herokuapp.com/findblogposts`;
         const conf = {method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -106,7 +106,7 @@ export default function SearchAppBar() {
             <AppBar position='fixed' className={classes.color}>
                 <Toolbar>
                     <Typography className={classes.title} variant='h6' noWrap>
-                        <Link style={{display: 'table-cell', color:'inherit', textDecoration:'none'}} href='http://localhost:3000'>OneDolah</Link>
+                        <Link style={{display: 'table-cell', color:'inherit', textDecoration:'none'}} href='https://onedolah.herokuapp.com/'>OneDolah</Link>
                     </Typography>
                     <Button color="inherit" onClick={logout}>Logout</Button>
                     <Button color="inherit" href={'/login'}>Login</Button>
