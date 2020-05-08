@@ -39,12 +39,14 @@ class BlogpostCreator extends React.Component {
 
     componentDidMount() {
         this.interval = setInterval(() => {
-            if (window.x === undefined || window.x.length === 0|| window.x === null || typeof(window.x) === "undefined") {
+            if (window.x === undefined || window.x.length === 0|| window.x === null || typeof(window.x) === "undefined" || window.x === []) {
+                console.log("normifetchi");
                 this.httpFetch.fetchBlogDataFromBackend((data) => {
                     this.index = data.length - 1;
                     this.setState({ blogPostData: data });
                 })
             } else {
+                console.log("windowifetchi");
                 this.setState({blogPostData: window.x})
             }
         }, 3000);
