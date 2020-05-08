@@ -40,13 +40,11 @@ class BlogpostCreator extends React.Component {
     componentDidMount() {
         this.interval = setInterval(() => {
             if (window.x === undefined || window.x.length === 0|| window.x === null || typeof(window.x) === "undefined" || window.x === []) {
-                console.log("normifetchi");
                 this.httpFetch.fetchBlogDataFromBackend((data) => {
                     this.index = data.length - 1;
                     this.setState({ blogPostData: data });
                 })
             } else {
-                console.log("windowifetchi");
                 this.setState({blogPostData: window.x})
             }
         }, 3000);
@@ -90,7 +88,7 @@ class BlogpostCreator extends React.Component {
             return (
                 <div className='root'>
                         <Card>
-                            <IconButton className='addIcon' disabled={this.isDisabled} onClick={() => this.deletePost(blogPostData[this.props.arrayIndex].id)}>
+                            <IconButton className='addIcon' disabled={this.isDisabled()} onClick={() => this.deletePost(blogPostData[this.props.arrayIndex].id)}>
                                 <DeleteIcon/>
                             </IconButton>
                             <CardHeader className='cardHeader'
