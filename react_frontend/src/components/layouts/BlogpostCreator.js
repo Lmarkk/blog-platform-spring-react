@@ -71,10 +71,10 @@ class BlogpostCreator extends React.Component {
     };
 
     isDisabled() {
-        if (this.loginData === "false" || this.loginData === "undefined" || this.loginData === undefined) {
-            return true
-        } else {
+        if (this.loginData === "true") {
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -88,7 +88,7 @@ class BlogpostCreator extends React.Component {
             return (
                 <div className='root'>
                         <Card>
-                            <IconButton className='addIcon' disabled={this.isDisabled()} onClick={() => this.deletePost(blogPostData[this.props.arrayIndex].id)}>
+                            <IconButton className='addIcon' disabled={this.isDisabled} onClick={() => this.deletePost(blogPostData[this.props.arrayIndex].id)}>
                                 <DeleteIcon/>
                             </IconButton>
                             <CardHeader className='cardHeader'
